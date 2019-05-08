@@ -1,0 +1,7 @@
+.character-images {
+  grid-column: 1 / 4;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  justify-items: center;
+  grid-gap: 10px;
+}

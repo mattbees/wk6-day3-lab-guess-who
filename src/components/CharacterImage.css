@@ -1,0 +1,8 @@
+.character-image img {
+  height: 100px;
+  width: 70px;
+  object-position: center;
+  border-radius: 10px;
+
+
+}
