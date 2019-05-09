@@ -1,3 +1,9 @@
 .characteristic-form {
   grid-column: 2 / 3;
 }
+
+.characteristic-form span {
+  font-size: 1.5em;
+  color: #4286f4;
+  font-weight: bold;
+}

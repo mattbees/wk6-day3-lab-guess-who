@@ -18,8 +18,10 @@ class GameContainer extends Component {
   this.selectWinner = this.selectWinner.bind(this);
   this.getSelectionOptions = this.getSelectionOptions.bind(this);
   this.getFullOptions = this.getFullOptions.bind(this);
+  // this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
+  // So far unable to store random winner as state here. Passing as props.
   selectWinner() {
     const winner = this.state.data[this.randomNumber()];
     return winner;
@@ -49,6 +51,7 @@ class GameContainer extends Component {
     return selectOptions;
   };
 
+  
 
   render() {
     return (
@@ -56,8 +59,10 @@ class GameContainer extends Component {
         <GameLogo logo={this.state.logo} />
         <CharacterImages data={this.state.data} />
         <CharacteristicForm
+          getSelectionOptions={this.getSelectionOptions}
+          // handleFormSubmit={this.handleFormSubmit}
           winner={this.selectWinner()}
-          getSelectionOptions={this.getSelectionOptions}/>
+        />
       </div>
       // <GuessForm />
     );

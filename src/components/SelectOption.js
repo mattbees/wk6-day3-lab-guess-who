@@ -1,5 +1,4 @@
 import React from "react";
-import './SelectOption.css';
 
 const SelectOption = (props) => {
   return (

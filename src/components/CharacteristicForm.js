@@ -7,15 +7,19 @@ class CharacteristicForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      characteristic: '',
-      selection: '',
-      selectionOptions: []
+      characteristic: 'gender',
+      selection: 'Male',
+      selectionOptions: [ 'Male', 'Female' ],
+      feedback: ''
     }
+
+    console.log(props.winner); // DELETE
 
     this.handleCharacteristicChange = this.handleCharacteristicChange.bind(this);
     this.handleSelectionChange = this.handleSelectionChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.render = this.render.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this) // DELETE
   }
 
   handleCharacteristicChange(event) {
@@ -23,12 +27,15 @@ class CharacteristicForm extends Component {
       const options =
         this.props.getSelectionOptions(this.state.characteristic);
       this.setState({ selectionOptions: options });
+      this.setState({ selection: options[0] });
     });
+    this.setState({ feedback: '' });
   };
 
 
   handleSelectionChange(event) {
     this.setState({ selection: event.target.value })
+    this.setState({ feedback: '' });
   }
 
   handleSubmit(event) {
@@ -36,9 +43,17 @@ class CharacteristicForm extends Component {
     const characteristic = this.state.characteristic;
     const selection = this.state.selection;
     const newSelection = {characteristic, selection};
-    this.props.handleSelectSubmit(newSelection);
-    // this.setState({characteristic: '', selection: ''});
+    this.handleFormSubmit(newSelection); // DELETED this.props. ...
   }
+
+  // THIS SHOULD BE IN CONTAINER BUT I CAN'T RETAIN WINNER THERE
+  handleFormSubmit(newSelection) {
+    if (this.props.winner[newSelection.characteristic] === newSelection.selection) {
+      this.setState({ feedback: 'Yes!' });
+    } else {
+      this.setState({ feedback: 'No!' });
+    };
+  };
 
 
   render() {
@@ -62,7 +77,8 @@ class CharacteristicForm extends Component {
             {options}
           </select>
         </label>
-        <input className='positive ui button' type="submit" value="Submit" />
+        <input className='positive ui button' type="submit" value="Do they have this?" />
+        <span>{this.state.feedback}</span>
       </form>
     );
 
